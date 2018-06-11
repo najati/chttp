@@ -1,3 +1,3 @@
 #pragma once
 
-void handle_client(int clientSocket, char* dir);
+void handle_request(int clientSocket, char* dir);

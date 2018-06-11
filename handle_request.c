@@ -10,7 +10,7 @@
 #include "socket_util.h"
 #include "string_util.h"
 
-void handle_client(int socket, char *dir) {
+void handle_request(int socket, char *dir) {
 	char request_path[1024];
 	strcpy(request_path, dir);
 
