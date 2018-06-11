@@ -15,12 +15,13 @@ void init_reader(LineReader* reader, int socket) {
 int read_line(LineReader* reader, char* line) {
 	char *newline_location;
 	int newline_index;
-	int chunk_size;
 
 	if ((newline_location = strchr(reader->buffer, '\n')) == 0) {
-		char* dest = reader->buffer + reader->buffer_size;
-		int dest_capacity = RECEIVE_BUFFER_SIZE - reader->buffer_size;
-		if ((chunk_size = recv(reader->socket, dest, dest_capacity, 0)) < 0) {
+		char* destination_buffer = reader->buffer + reader->buffer_size;
+		int destination_buffer_capacity = RECEIVE_BUFFER_SIZE - reader->buffer_size;
+
+		int chunk_size;
+		if ((chunk_size = recv(reader->socket, destination_buffer, destination_buffer_capacity, 0)) < 0) {
 			die_with_error("recv() failed");
 		}
 

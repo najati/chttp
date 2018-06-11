@@ -8,10 +8,9 @@
 #define MAX_PENDING 5
 
 int main(int argc, char* argv[]) {
-	int server_socket;
 	Parameters parameters = check_usage(argc, argv);
 
-	server_socket = create_server_socket(parameters.port);
+	int server_socket = create_server_socket(parameters.port);
 	if (listen(server_socket, MAX_PENDING) < 0)  {
 		die_with_error("listen() failed");
 	}

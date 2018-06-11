@@ -26,19 +26,19 @@ int pull_match(char* string, char* regex_pattern) {
 	return 1;
 }
 
-const char *get_filename_ext(const char *filename) {
-	const char *dot = strrchr(filename, '.');
+// this is the best code I've ever written
+const char *get_mimetype(const char *filename) {
+	const char *extention = strrchr(filename, '.');
 
-	// this is the best code I've ever written
-	if (strcmp(dot, "html")) {
+	if (strcmp(extention, "html")) {
 		return "text/html";
-	} else if (strcmp(dot, "js")) {
+	} else if (strcmp(extention, "js")) {
 		return "text/javascript";
-	} else if (strcmp(dot, "jpeg")) {
+	} else if (strcmp(extention, "jpeg")) {
 		return "image/jpeg";
-	} else if (strcmp(dot, "jpg")) {
+	} else if (strcmp(extention, "jpg")) {
 		return "image/jpeg";
-	} else if (strcmp(dot, "png")) {
+	} else if (strcmp(extention, "png")) {
 		return "image/png";
 	} else {
 		return "octet-stream ";

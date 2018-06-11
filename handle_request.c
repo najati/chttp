@@ -37,7 +37,7 @@ void handle_request(int socket, char *dir) {
 		send_string(socket, "HTTP/1.1 200 OK\n");
 		send_string(socket, "Server: Najati\n");
 		send_string(socket, "Content-Type: ");
-		send_string(socket, get_filename_ext(request_path));
+		send_string(socket, get_mimetype(request_path));
 		send_string(socket, "\n");
 		send_string(socket, "\n");
 		send_file(socket, request_path);		
