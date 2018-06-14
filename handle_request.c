@@ -22,7 +22,7 @@ void handle_request(int socket, char *dir) {
 
 	while ((line_length = read_line(&reader, line)) > 0) {
 		line[line_length] = 0;
-		if (pull_match(line, "^GET\\s([^ \t\r\n\v\f\?]*).*")) {
+		if (pull_match(line, "^GET ([^ ]*) .*")) {
 			if (strlen(line) == 1) {
 				strcpy(request_path + strlen(request_path), "/index.html");
 			} else {
