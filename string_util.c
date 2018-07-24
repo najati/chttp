@@ -4,7 +4,7 @@
 
 #include "die_with_error.h"
 
-int pull_match(char* string, char* regex_pattern) {
+int find_match(char* source, char* regex_pattern, char* dst) {
 	int status, length;
 	regex_t re;
 	regmatch_t matches[2];
@@ -12,7 +12,7 @@ int pull_match(char* string, char* regex_pattern) {
 	if (regcomp(&re, regex_pattern, REG_EXTENDED) != 0) {
 		die_with_error("couldn't compile regex");
 	}
-	status = regexec(&re, string, 2, matches, 0);
+	status = regexec(&re, source, 2, matches, 0);
 	regfree(&re);
 	
 	if (status != 0) {
@@ -20,8 +20,8 @@ int pull_match(char* string, char* regex_pattern) {
 	}
 
 	length = matches[1].rm_eo - matches[1].rm_so;
-	memmove(string, string + matches[1].rm_so, length);
-	string[length] = 0;
+	memmove(dst, source + matches[1].rm_so, length);
+	dst[length] = 0;
 	
 	return 1;
 }

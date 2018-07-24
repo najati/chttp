@@ -22,7 +22,7 @@ void handle_request(int socket, char *dir) {
 
 	while ((line_length = read_line(&reader, line)) > 0) {
 		line[line_length] = 0;
-		if (pull_match(line, "^GET ([^ ]*) .*")) {
+		if (find_match(line, "^GET ([^ ]*) .*", line)) {
 			if (strlen(line) == 1) {
 				strcpy(request_path + strlen(request_path), "/index.html");
 			} else {
@@ -34,18 +34,12 @@ void handle_request(int socket, char *dir) {
 	fprintf(stderr, "Got a request for: %s\n", request_path);
 
 	if (access(request_path, F_OK) != -1) {
-		send_string(socket, "HTTP/1.1 200 OK\n");
-		send_string(socket, "Server: Najati\n");
-		send_string(socket, "Content-Type: ");
+		send_string(socket, "HTTP/1.1 200 OK\nServer: Najati\nContent-Type: ");
 		send_string(socket, get_mimetype(request_path));
-		send_string(socket, "\n");
-		send_string(socket, "\n");
+		send_string(socket, "\n\n");
 		send_file(socket, request_path);		
 	} else {
-		send_string(socket, "HTTP/1.1 404 Not Found\n");
-		send_string(socket, "Server: Najati\n");
-		send_string(socket, "\n");
-		send_string(socket, "Not Found\n");
+		send_string(socket, "HTTP/1.1 404 Not Found\nServer: Najati\n\nsNot Found\n");
 	}
 
 	close(socket);
