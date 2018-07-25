@@ -6,7 +6,7 @@
 typedef struct {
 	int socket;
 	char buffer[RECEIVE_BUFFER_SIZE];
-	int buffer_size;
+	int content_size;
 } LineReader;
 
 void init_reader(LineReader* reader, int socket);

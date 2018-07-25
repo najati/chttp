@@ -1,0 +1,16 @@
+digraph G {
+  "chttp" -> "check usage"
+  "chttp" -> "create server socket"
+  "create server socket" -> "create socket"
+  "create server socket" -> "create address"
+  "create server socket" -> "bind address"
+  "chttp" -> "handle client request"
+  "handle client request" -> "get client socket"
+  "handle client request" -> "handle request"
+  "handle request" -> "get requested file"
+  "handle request" -> "write response to socket"
+  "get requested file" -> "line reader"
+  "get requested file" -> "regex for GET line"
+  "write response to socket" -> "write string to socket"
+  "write response to socket" -> "write file to socket"
+}
